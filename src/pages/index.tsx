@@ -11,13 +11,6 @@ const Home: NextPage = () => {
     keys: "type=gettext",
   });
 
-  const getContent = (key: string) => {
-    const text = pageContent.data?.filter(
-      (row: siteContentRow) => row.header == key
-    )[0]?.content;
-    console.log({ text });
-    return text;
-  };
   return (
     <>
       <Head>
@@ -33,10 +26,10 @@ const Home: NextPage = () => {
           <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
             <span className="ml-4 text-5xl">
               {" "}
-              {pageContent.data && getContent("ליד הלוגו")}
+              {pageContent.data && getContent("ליד הלוגו", pageContent)}
             </span>
             <span className="text-[hsl(280,100%,70%)]">
-              {pageContent.data && getContent("לוגו")}
+              {pageContent.data && getContent("לוגו", pageContent)}
             </span>
           </h1>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
@@ -46,8 +39,8 @@ const Home: NextPage = () => {
               target="_blank"
             >
               <h3 className="text-2xl font-bold">עלינו →</h3>
-              <div className="text-lg">
-                {pageContent.data && getContent("עלינו")}
+              <div className="text-lg line-clamp-4">
+                {pageContent.data && getContent("עלינו מקוצר", pageContent)}
               </div>
             </Link>
             <Link
@@ -56,8 +49,8 @@ const Home: NextPage = () => {
               target="_blank"
             >
               <h3 className="text-2xl font-bold">לקוחות ממליצים →</h3>
-              <div className="text-lg">
-                {pageContent.data && getContent("לקוחות מספרים")}
+              <div className="text-lg line-clamp-4">
+                {pageContent.data && getContent("לקוחות מספרים", pageContent)}
               </div>
             </Link>
           </div>
@@ -97,4 +90,12 @@ const AuthShowcase: React.FC = () => {
       </button>
     </div>
   );
+};
+
+export const getContent = (key: string, pageContent: any) => {
+  const text = pageContent.data?.filter(
+    (row: siteContentRow) => row.header == key
+  )[0]?.content;
+  console.log({ text });
+  return text;
 };
