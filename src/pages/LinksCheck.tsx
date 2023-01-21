@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 const lcURL =
-  "https://script.google.com/macros/s/AKfycbyreHXYiwITQf7wejWY5-a0MVmOJG1OqtgxkRLaKabQTvW_Oq_af22VV8Po8dntcxpiYQ/exec?type=links";
+  "https://script.google.com/macros/s/AKfycbx7ZLwlp1PTc3mAWriUGGo0mWiMdQNqKODFZnkn9vm2jqkd1ZgjRLAGGe7bAYpV6qBg-g/exec?type=links";
 
 // let params = new URLSearchParams(lcURL.search);
 // params.append("type", "links");
