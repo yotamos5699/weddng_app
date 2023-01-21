@@ -9,7 +9,7 @@
 const config = {
   reactStrictMode: true,
   images: { domains: ["drive.google.com"] },
-  swcMinify: true,
+  //  swcMinify: true,
   eslint: {
     ignoreDuringBuilds: true,
   },
