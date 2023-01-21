@@ -36,15 +36,21 @@ function LinksCheck() {
               <div className="flex">
                 <Image
                   src={LinkData.emptyLink}
-                  alt={""}
-                  width={500}
-                  height={500}
+                  fill={true}
+                  sizes="(max-width: 768px) 100vw,
+          (max-width: 1200px) 50vw,
+          33vw"
+                  className=" mb-8 mt-4 h-40 rounded-2xl hover:bg-slate-300"
+                  alt="Image Alt"
                 />
                 <Image
                   src={LinkData.fullLink}
-                  alt={""}
-                  width={500}
-                  height={500}
+                  fill={true}
+                  sizes="(max-width: 768px) 100vw,
+                  (max-width: 1200px) 50vw,
+                  33vw"
+                  className=" mb-8 mt-4 h-40 rounded-2xl hover:bg-slate-300"
+                  alt="Image Alt"
                 />
               </div>
             </div>
