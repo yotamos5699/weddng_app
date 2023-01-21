@@ -36,13 +36,13 @@ function LinksCheck() {
               </p>
               <div className="flex">
                 <Image
-                  src={LinkData.emptyLink}
+                  src={"/" + LinkData.emptyLink}
                   alt={""}
                   width={500}
                   height={500}
                 />
                 <Image
-                  src={LinkData.fullLink}
+                  src={"/" + LinkData.fullLink}
                   alt={""}
                   width={500}
                   height={500}
