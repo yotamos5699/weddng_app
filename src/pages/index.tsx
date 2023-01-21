@@ -22,7 +22,24 @@ const Home: NextPage = () => {
         dir="rtl"
         className="flex min-h-screen  flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]"
       >
-        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
+        <div className=" container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
+          <div className="top-0 flex items-center gap-8 border-2 border-pink-200">
+            <p className="text-xl">פיתוח</p>
+            <Link
+              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
+              href="/Invites"
+              target="_blank"
+            >
+              <p>בדיקת הזמנה חדשה </p>
+            </Link>
+            <Link
+              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
+              href="/LinksCheck"
+              target="_blank"
+            >
+              <p> בדיקת קישורים </p>
+            </Link>
+          </div>
           <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
             <span className="ml-4 text-5xl">
               {" "}

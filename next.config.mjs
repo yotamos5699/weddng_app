@@ -8,6 +8,7 @@
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
+  images: { domains: ["drive.google.com"] },
   swcMinify: true,
   eslint: {
     ignoreDuringBuilds: true,
