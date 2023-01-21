@@ -9,15 +9,6 @@
 const config = {
   reactStrictMode: true,
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "google.com",
-        port: "",
-        pathname: "**",
-      },
-    ],
-
     domains: ["drive.google.com"],
   },
   swcMinify: true,
