@@ -18,10 +18,11 @@ const getLinks = async () => {
 
 function LinksCheck() {
   const links = useQuery({ queryKey: ["LinksCheck"], queryFn: getLinks });
-
+  console.log({ links });
   return (
     <div dir="rtl" className="flex flex-col">
       {links.data &&
+        links?.data?.length > 1 &&
         links.data.map((LinkData: any) => {
           return (
             <div className="flex flex-col">
