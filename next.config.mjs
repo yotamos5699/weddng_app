@@ -8,7 +8,18 @@
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
-  images: { domains: ["drive.google.com"] },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "google.com",
+        port: "",
+        pathname: "**",
+      },
+    ],
+
+    domains: ["drive.google.com"],
+  },
   swcMinify: true,
   eslint: {
     ignoreDuringBuilds: true,
