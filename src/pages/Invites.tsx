@@ -17,7 +17,7 @@ export default Invites;
 //   firstName?: string;
 //   lastName?: string;
 //   relatedParticipant?: string;
-//   style?: [{ ofType: "full" | "first" | "last"; data: string[] }];
+//  // style?: [{ ofType: "full" | "first" | "last"; data: string[] }];
 // };
 
 // type Couple = {
@@ -25,7 +25,7 @@ export default Invites;
 //   firstName?: string;
 //   lastName?: string | undefined;
 //   relatedParticipant?: string | undefined;
-//   style?: [{ ofType: "full" | "first" | "last"; data: string[] }] | undefined;
+//  // style?: [{ ofType: "full" | "first" | "last"; data: string[] }] | undefined;
 // };
 
 // type eventDate = {
