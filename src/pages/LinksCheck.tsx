@@ -35,8 +35,18 @@ function LinksCheck() {
                 <span>{LinkData.about}</span>
               </p>
               <div className="flex w-full ">
-                <Image src={LinkData.emptyLink} alt={""} fill={true} />
-                <Image src={LinkData.fullLink} alt={""} fill={true} />
+                <Image
+                  src={LinkData.emptyLink}
+                  alt={""}
+                  height={500}
+                  width={500}
+                />
+                <Image
+                  src={LinkData.fullLink}
+                  alt={""}
+                  height={500}
+                  width={500}
+                />
               </div>
             </div>
           );
