@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import Invites from "../components/Invites";
 const lcURL =
   "https://script.google.com/macros/s/AKfycbx7ZLwlp1PTc3mAWriUGGo0mWiMdQNqKODFZnkn9vm2jqkd1ZgjRLAGGe7bAYpV6qBg-g/exec?type=links";
 
@@ -28,6 +29,11 @@ const getLinks = async () => {
 
 function LinksCheck() {
   const links = useQuery({ queryKey: ["LinksCheck"], queryFn: getLinks });
+  const [selectedInvite, setSelectedInvite] = useState({
+    link: "",
+    showInvite: false,
+  });
+
   console.log({ links });
   return (
     <div
@@ -35,12 +41,21 @@ function LinksCheck() {
       className="flex min-h-screen w-screen  flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]"
     >
       {links.data &&
+        !selectedInvite.showInvite &&
         links?.data?.length > 1 &&
         links.data.map((LinkData: LinksImageProps) => {
           return (
             <div
               key={LinkData.id}
               className="flex h-80 w-full flex-col border-2 border-gray-200 "
+              onClick={() => {
+                console.log("selected mother fucker");
+                setSelectedInvite({
+                  ...selectedInvite,
+                  showInvite: true,
+                  link: LinkData.emptyLink,
+                });
+              }}
             >
               <p className="flex gap-8 text-xl">
                 <span>עיצוב</span>
@@ -61,6 +76,9 @@ function LinksCheck() {
             </div>
           );
         })}
+      {selectedInvite.showInvite && (
+        <Invites inviteLink={selectedInvite.link} />
+      )}
     </div>
   );
 }
