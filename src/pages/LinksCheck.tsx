@@ -8,6 +8,16 @@ const lcURL =
 // let params = new URLSearchParams(lcURL.search);
 // params.append("type", "links");
 
+interface LinksImageProps {
+  id: string | number;
+  design: string;
+  name: string;
+  about: string;
+
+  fullLink: string;
+  emptyLink: string;
+}
+
 const getLinks = async () => {
   console.log({ lcURL });
   const res = await axios.get(lcURL, { withCredentials: false }).then((res) => {
@@ -20,12 +30,18 @@ function LinksCheck() {
   const links = useQuery({ queryKey: ["LinksCheck"], queryFn: getLinks });
   console.log({ links });
   return (
-    <div dir="rtl" className="flex flex-col">
+    <div
+      dir="rtl"
+      className="flex min-h-screen w-screen  flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]"
+    >
       {links.data &&
         links?.data?.length > 1 &&
-        links.data.map((LinkData: any) => {
+        links.data.map((LinkData: LinksImageProps) => {
           return (
-            <div className="flex flex-col">
+            <div
+              key={LinkData.id}
+              className="flex h-80 w-full flex-col border-2 border-gray-200 "
+            >
               <p className="flex gap-8 text-xl">
                 <span>עיצוב</span>
                 <span>{LinkData.design}</span>
@@ -34,19 +50,13 @@ function LinksCheck() {
                 <span>תיאור</span>
                 <span>{LinkData.about}</span>
               </p>
-              <div className="flex w-full ">
-                <Image
-                  src={LinkData.emptyLink}
-                  alt={""}
-                  height={500}
-                  width={500}
-                />
-                <Image
-                  src={LinkData.fullLink}
-                  alt={""}
-                  height={500}
-                  width={500}
-                />
+              <div className=" flex h-full sm:flex-row">
+                <div className="br1 relative h-full w-1/2">
+                  <Image src={LinkData.emptyLink} alt={""} fill />
+                </div>
+                <div className="br1 relative h-full w-1/2">
+                  <Image src={LinkData.fullLink} alt={""} fill />
+                </div>
               </div>
             </div>
           );
