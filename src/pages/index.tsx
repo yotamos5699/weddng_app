@@ -4,7 +4,7 @@ import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 
 import { api } from "../utils/api";
-import type { Dispatch, SetStateAction } from "react";
+import type { CSSProperties, Dispatch, SetStateAction } from "react";
 import { useState } from "react";
 import { DefaultSession } from "next-auth";
 import Devnav from "../components/Devnav";
@@ -30,73 +30,81 @@ const Home: NextPage = () => {
         <meta name="description" content="מנהל החתונה שלך" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main
-        dir="rtl"
-        className="flex min-h-screen  flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]"
-      >
-        <div className=" container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-          <Devnav setIsConected={setIsConected} />
-          <h1 className="flex flex-col text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-            <span className="text-[hsl(280,100%,70%)]">
-              {pageContent.data && getContent("לוגו", pageContent)}
-            </span>
-            <code className="ml-4  text-[20px]">
-              {" "}
-              {pageContent.data && getContent("ליד הלוגו", pageContent)}
-            </code>
-          </h1>
-          {!isConected && (
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-              <Link
-                className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-                href="/Info"
-                target="_blank"
-              >
-                <h3 className="text-2xl font-bold">עלינו →</h3>
-                <div className="text-lg line-clamp-4">
-                  {pageContent.data && getContent("עלינו מקוצר", pageContent)}
-                </div>
-              </Link>
-              <Link
-                className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-                href="Recommendation"
-                target="_blank"
-              >
-                <h3 className="text-2xl font-bold">לקוחות ממליצים →</h3>
-                <div className="text-lg line-clamp-4">
-                  {pageContent.data && getContent("לקוחות מספרים", pageContent)}
-                </div>
-              </Link>
-            </div>
-          )}
-          <div className="flex flex-col items-center gap-4">
-            <p className="text-2xl text-white">
-              {hello.data ? hello.data.greeting : "טוען..."}
-            </p>
-            {isConected && (
-              <a
-                className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-                //   href="/UserInterface"
-                target="_blank"
-                onClick={() => {
-                  console.log("in click !!!!!", { usserData });
-                  saveRouterProps(usserData.user, "/UserInterface");
-                }}
-              >
-                <h3 className="text-2xl font-bold">כנס לממשק →</h3>
-                <div className="text-lg line-clamp-4">
-                  {pageContent.data && getContent("כפתור ממשק", pageContent)}
-                </div>
-              </a>
+      {pageContent?.data ? (
+        <main
+          dir="rtl"
+          className="flex min-h-screen  flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]"
+        >
+          <div className=" container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
+            <Devnav setIsConected={setIsConected} />
+            <h1 className="flex flex-col text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
+              <span className="text-[hsl(280,100%,70%)]">
+                {pageContent.data && getContent("לוגו", pageContent)}
+              </span>
+              <code className="ml-4  text-[20px]">
+                {" "}
+                {pageContent.data && getContent("ליד הלוגו", pageContent)}
+              </code>
+            </h1>
+            {!isConected && (
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
+                <Link
+                  className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
+                  href="/Info"
+                  target="_blank"
+                >
+                  <h3 className="text-2xl font-bold">עלינו →</h3>
+                  <div className="text-lg line-clamp-4">
+                    {pageContent.data && getContent("עלינו מקוצר", pageContent)}
+                  </div>
+                </Link>
+                <Link
+                  className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
+                  href="Recommendation"
+                  target="_blank"
+                >
+                  <h3 className="text-2xl font-bold">לקוחות ממליצים →</h3>
+                  <div className="text-lg line-clamp-4">
+                    {pageContent.data &&
+                      getContent("לקוחות מספרים", pageContent)}
+                  </div>
+                </Link>
+              </div>
             )}
-            <AuthShowcase
-              setUsserData={setUsserData}
-              isConected={isConected}
-              setIsConected={setIsConected}
-            />
+            <div className="flex flex-col items-center gap-4">
+              <p className="text-2xl text-white">
+                {hello.data ? hello.data.greeting : "טוען..."}
+              </p>
+              {isConected && (
+                <a
+                  className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
+                  //   href="/UserInterface"
+                  target="_blank"
+                  onClick={() => {
+                    console.log("in click !!!!!", { usserData });
+                    saveRouterProps(usserData.user, "/UserInterface");
+                  }}
+                >
+                  <h3 className="text-2xl font-bold">כנס לממשק →</h3>
+                  <div className="text-lg line-clamp-4">
+                    {pageContent.data && getContent("כפתור ממשק", pageContent)}
+                  </div>
+                </a>
+              )}
+              <AuthShowcase
+                setUsserData={setUsserData}
+                isConected={isConected}
+                setIsConected={setIsConected}
+              />
+            </div>
           </div>
+        </main>
+      ) : (
+        <div>
+          <code>....כמה שניות</code>
+          <Spiner />
         </div>
-      </main>
+      )}
     </>
   );
 };
@@ -151,6 +159,31 @@ export const getContent = (key: string, pageContent: any) => {
   )[0]?.content;
   console.log({ text });
   return text;
+};
+
+import ClipLoader from "react-spinners/ClipLoader";
+
+const override: CSSProperties = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "red",
+};
+
+export const Spiner = (props: any) => {
+  let [color, setColor] = useState("blue");
+
+  return (
+    <div className="sweet-loading">
+      <ClipLoader
+        color={color}
+        loading={props.loading}
+        // cssOverride={override}
+        size={150}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
+    </div>
+  );
 };
 
 // email
