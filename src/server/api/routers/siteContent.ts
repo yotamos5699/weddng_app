@@ -19,7 +19,7 @@ import { createTRPCRouter, publicProcedure, protectedProcedure } from "../trpc";
 export const siteInfoRouter = createTRPCRouter({
   hello: publicProcedure.query(async () => {
     const res: siteContentRow[] = await getSiteContent();
-    console.log({ res });
+    // console.log({ res });
     return res;
   }),
 
