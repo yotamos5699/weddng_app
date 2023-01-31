@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 const log = false;
 const getSavedValue = (key: string, initialValue: any) => {
   console.log({ key, initialValue });
+  if (typeof window === "undefined") return;
   const storageType = localStorage.getItem(key);
   console.log({ storageType });
   if (storageType) {

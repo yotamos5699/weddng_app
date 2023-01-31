@@ -1,11 +1,7 @@
 import React, { useEffect } from "react";
-import { useReactTable } from "@tanstack/react-table";
-import { makeMockTableData } from "./makeData";
-import useLocalStorage from "../../hooks/useLocalStorage";
-import { BiMessageAdd } from "react-icons/bi";
+
 import { MdOutlineSecurityUpdateWarning } from "react-icons/md";
-import { type } from "os";
-import { Select } from "../Invites";
+
 import Select_ from "./Select";
 const statsValues = ["אולי", "אין מענה", "אושר", "סורב", "לא נשלחה"];
 type tRow = {
