@@ -100,6 +100,7 @@ export const listOfQuestions = [
         header: "הזן מס ימים ליפני תאריך האירוע",
         content: "",
         inputType: "number",
+        flexState: true,
       },
       {
         header: "הודעת התזכורת",
@@ -124,6 +125,7 @@ export const listOfQuestions = [
         header: "בחרו שעה",
         content: "",
         inputType: "time",
+        flexState: true,
       },
     ],
   },
@@ -171,6 +173,7 @@ export const listOfQuestions = [
         header: "בחרו שעה",
         content: "",
         inputType: "time",
+        flexState: true,
       },
     ],
   },

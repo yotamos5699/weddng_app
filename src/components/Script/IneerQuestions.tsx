@@ -13,24 +13,15 @@ export const InnerQuestions = ({
           return (
             <div
               key={message.header}
-              className={`${
-                mainMessage?.styleData?.isMultiCheck &&
-                "  items-center border-2 border-white"
-              } ${
-                mainMessage?.styleData?.isFlexCol
-                  ? "flex-col border-2 border-white"
-                  : mainMessage?.styleData?.isMultiCheck
-                  ? ""
-                  : ""
-              } h-full w-full ${
-                !mainMessage?.styleData?.isFlexCol &&
-                !mainMessage?.styleData?.isMultiCheck &&
-                "flex flex-row-reverse"
-              }  w-3/4 items-center gap-4  text-center text-sm`}
+              className={` h-full w-full w-3/4 items-center gap-4  text-center text-sm`}
             >
               {message.inputType !== "textarea" &&
               !mainMessage?.styleData?.isMultiCheck ? (
-                <div>
+                <div
+                  className={`flex items-center ${
+                    message?.flexState && "flex-col"
+                  } w-full flex-row-reverse justify-center`}
+                >
                   <p
                     className={`${
                       !mainMessage?.styleData && " w-1/3 "
@@ -84,13 +75,7 @@ export const InnerQuestions = ({
                 </div>
               ) : !mainMessage?.styleData?.isMultiCheck ? (
                 <div>
-                  <p
-                    className={`${
-                      !mainMessage?.styleData && " w-1/3 "
-                    } text-[12px] ${
-                      mainMessage?.styleData?.isFlexCol && "mb-2"
-                    } `}
-                  >
+                  <p className={"flex w-full flex-row-reverse justify-center"}>
                     {message.header}
                   </p>
                   <p className="text-[8px]">

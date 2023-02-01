@@ -53,4 +53,5 @@ interface innerMessage {
     | any;
   addedText?: string;
   default?: any;
+  flexState?: boolean;
 }
