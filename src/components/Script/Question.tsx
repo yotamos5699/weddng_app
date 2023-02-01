@@ -10,11 +10,13 @@ export const Question = ({
 }: QuestionProps) => {
   console.log({ message });
   return (
-    <div className="flex flex-col items-center">
-      <h1 className="  rounded-lg border-2 border-pink-100 text-center text-base">
-        {message?.mainHeader}
-      </h1>
-      <p className="mb-4 text-[8px]">{message?.addedText}</p>
+    <div className="flex w-full flex-col items-center">
+      <div className="border-1 w-full border-white">
+        <h1 className="  rounded-lg border-2 border-pink-100 text-center text-base">
+          {message?.mainHeader}
+        </h1>
+      </div>
+      <p className="mb-4 mt-1 text-[8px]">{message?.addedText}</p>
 
       {innerArrays ? (
         innerArrays.map((array: any) => {

@@ -6,184 +6,10 @@ import React, {
   useLayoutEffect,
   useState,
 } from "react";
+import { TiArrowBackOutline } from "react-icons/ti";
 import { Question } from "../components/Script/Question";
-const listOfQuestions = [
-  {
-    mainHeader: "הורים",
-    inputs: [
-      {
-        header: "שם האב",
-        content: "",
-        inputType: "text",
-        default: "הכנס שם מלא",
-      },
-      {
-        header: "שם האם",
-        content: "",
-        inputType: "text",
-        default: "הכנס שם מלא",
-      },
-    ],
-  },
-  {
-    mainHeader: "מתחתנים",
-    inputs: [
-      {
-        header: "שם החתן",
-        content: "",
-        inputType: "text",
-        default: "הכנס שם מלא",
-      },
-      {
-        header: "שם הכלה",
-        content: "",
-        inputType: "text",
-        default: "הכנס שם מלא",
-      },
-    ],
-  },
-  {
-    mainHeader: "אולם",
-    inputs: [
-      {
-        header: "שם האולם",
-        content: "",
-        inputType: "text",
-      },
-      {
-        header: "כתובת",
-        content: "",
-        inputType: "text",
-        default: "עיר רחוב ומספר",
-      },
-    ],
-  },
-  {
-    mainHeader: "תאריך ושעה",
-    inputs: [
-      {
-        header: "תאריך",
-        content: "",
-        inputType: "date",
-      },
-      {
-        header: "שעה",
-        content: "",
-        inputType: "time",
-      },
-    ],
-  },
-  {
-    mainHeader: "הודעה ראשונה",
-    styleData: { gotButton: true, isFlexCol: true },
-    inputs: [
-      { header: "הודעה ראשונה שתשלח", content: "", inputType: "textarea" },
-    ],
-  },
-  {
-    mainHeader: "מענה לתגובת המוזמן",
-    addedText: "ערוך תגובה ראשונה",
-    styleData: { gotButton: true, isFlexCol: true },
-    inputs: [
-      {
-        header: "אם אושרה השתתפות",
-        content: "",
-        inputType: "textarea",
-        default: "כמה תבואו",
-        addedText: " האורח יתבקש להקליד מספר הצפויים להגיע עימו",
-      },
-      {
-        header: "אם לא אושרה השתתפות",
-        content: "",
-        inputType: "textarea",
-        default: "חז'ל אמרו",
-      },
-    ],
-  },
-  {
-    mainHeader: "הודעות תזכורת למאשרים",
-    addedText: "ניתן להגדיר מספר תזכורות",
-    styleData: { gotButton: true, isFlexCol: true },
-    inputs: [
-      {
-        header: "הזן מס ימים ליפני תאריך האירוע",
-        content: "",
-        inputType: "number",
-      },
-      {
-        header: "הודעת התזכורת",
-        content: "",
-        inputType: "textarea",
-        default: "להזכירכם הנכם מוזמנים לאירוע של מצפים לראותכם",
-      },
-    ],
-  },
-  {
-    mainHeader: "הודעה ביום האירוע",
-    addedText: "הודעה למס שעות ליפני האירוע עצמו",
-    styleData: { gotButton: true, isFlexCol: true },
-
-    inputs: [
-      {
-        header: "תוכן ההודעה",
-        content: "",
-        inputType: "textarea",
-      },
-      {
-        header: "בחרו שעה",
-        content: "",
-        inputType: "time",
-      },
-    ],
-  },
-  {
-    mainHeader: "תוספות להודעה",
-    addedText: "איזה אפשרויות תרצו שנכלול בהודעה",
-    styleData: { gotButton: true, isMultiCheck: true },
-
-    inputs: [
-      {
-        header: "כללו כפתור ניווט",
-        content: "",
-        inputType: "checkbox",
-      },
-      {
-        header: "כללו קישור להזמנה",
-        content: "",
-        inputType: "checkbox",
-      },
-
-      {
-        header: "מס שאושרו ע'י האורח",
-        content: "",
-        inputType: "checkbox",
-      },
-      {
-        header: "כללו בקשת אימות נוספת",
-        content: "",
-        inputType: "checkbox",
-      },
-    ],
-  },
-  {
-    mainHeader: "בבוקר שלאחר האירוע",
-    addedText: " מה תרצו שיקבלו האורחים ביום למחרת",
-    styleData: { gotButton: true, isFlexCol: true },
-
-    inputs: [
-      {
-        header: "תוכן ההודעה",
-        content: "",
-        inputType: "textarea",
-      },
-      {
-        header: "בחרו שעה",
-        content: "",
-        inputType: "time",
-      },
-    ],
-  },
-];
+import { listOfQuestions } from "../constents";
+import { saveRouterProps } from "../hooks/routerHooks";
 
 function Script() {
   const [script, setScript] = useState<ScriptMessage[]>(listOfQuestions);
@@ -207,17 +33,14 @@ function Script() {
   }, [progressBar, script]);
 
   return (
-    <div className="mt- flex flex-col items-center gap-8">
-      <h1 className="flex items-center justify-center gap-4">
-        <p className="items-center justify-center">תסריט הודעות ומידע</p>
-        <Link
-          className="flex max-w-xs  gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-          href="/UserInterface"
-          target="_blank"
-        >
-          <h3 className=" font-bold">חזרה →</h3>
-          <div className="text-lg line-clamp-4"></div>
-        </Link>
+    <div className=" flex flex-col items-center gap-8">
+      <h1 className="flex text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
+        <a target="_blank">
+          <TiArrowBackOutline
+            onClick={() => saveRouterProps(null, "/UserInterface")}
+          />
+        </a>
+        <span className="text-[hsl(280,100%,70%)]">...הודעות ומידע</span>
       </h1>
 
       {script[progressBar.currentNum] && currentMessageInnerArrays && (

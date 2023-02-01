@@ -55,14 +55,14 @@ function UserInterface() {
               <h3 className="text-2xl font-bold">סטטיסטיקה →</h3>
               <div className="text-lg line-clamp-4"></div>
             </a>
-            <Link
+            <a
               className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-              href="/Script"
               target="_blank"
+              onClick={() => saveRouterProps(null, "/Script")}
             >
               <h3 className="text-2xl font-bold">הודעות ומידע →</h3>
               <div className="text-lg line-clamp-4"></div>
-            </Link>
+            </a>
             <a
               className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
               onClick={() => {
