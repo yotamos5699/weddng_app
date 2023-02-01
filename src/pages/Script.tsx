@@ -54,31 +54,40 @@ function Script() {
         />
       )}
 
-      <div className="flex w-3/4 justify-between   border-2 border-white">
+      <div className={` flex w-3/4 justify-between   border-2 border-white`}>
         <button
           onClick={() => {
+            progressBar.currentNum === script.length - 1 &&
+              saveRouterProps(null, "/UserInterface");
             if (progressBar.currentNum < progressBar.totalNum - 1)
               setProgressBar({
                 ...progressBar,
                 currentNum: progressBar.currentNum + 1,
               });
           }}
-          className="btn1"
+          className={`btn1 ${
+            progressBar.currentNum < script.length - 1
+              ? ""
+              : "bg-pink-400  font-bold text-black"
+          }`}
         >
-          המשך
+          {progressBar.currentNum < script.length - 1 ? "המשך" : "סיום"}
         </button>
-        <button
-          onClick={() => {
-            if (progressBar.currentNum > 0)
-              setProgressBar({
-                ...progressBar,
-                currentNum: progressBar.currentNum - 1,
-              });
-          }}
-          className="btn1"
-        >
-          חזור
-        </button>
+
+        {progressBar.currentNum > 0 && (
+          <button
+            onClick={() => {
+              if (progressBar.currentNum > 0)
+                setProgressBar({
+                  ...progressBar,
+                  currentNum: progressBar.currentNum - 1,
+                });
+            }}
+            className="btn1"
+          >
+            חזור
+          </button>
+        )}
       </div>
     </div>
   );

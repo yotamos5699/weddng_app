@@ -20,7 +20,7 @@ export const InnerQuestions = ({
                 <div
                   className={`flex items-center ${
                     message?.flexState && "flex-col"
-                  } w-full flex-row-reverse justify-center`}
+                  } w-full flex-row-reverse justify-center gap-4`}
                 >
                   <p
                     className={`${!mainMessage?.styleData && " w-1/3 "} ${
@@ -34,7 +34,7 @@ export const InnerQuestions = ({
                   </p>
                   <input
                     className={` mb-2
-                  h-10  w-1/3 rounded-lg text-center text-sm text-black
+                  h-10  w-1/3 rounded-lg text-center text-xl font-bold text-black
                    `}
                     type={message.inputType}
                     placeholder={message.default}
@@ -85,7 +85,7 @@ export const InnerQuestions = ({
                   </p>
                   <textarea
                     placeholder={message.default}
-                    className=" h-20 w-3/4 rounded-lg text-center text-black"
+                    className=" h-20 w-3/4 rounded-lg text-center text-xl font-bold text-black"
                     value={
                       script[progressBar.currentNum]?.inputs[idx]?.content ?? ""
                     }
