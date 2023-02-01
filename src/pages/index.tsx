@@ -157,7 +157,7 @@ export const getContent = (key: string, pageContent: any) => {
   const text = pageContent.data?.filter(
     (row: siteContentRow) => row.header == key
   )[0]?.content;
-  console.log({ text });
+  //  console.log({ text });
   return text;
 };
 
@@ -170,12 +170,10 @@ const override: CSSProperties = {
 };
 
 export const Spiner = (props: any) => {
-  let [color, setColor] = useState("blue");
-
   return (
     <div className="sweet-loading">
       <ClipLoader
-        color={color}
+        color={"blue"}
         loading={props.loading}
         // cssOverride={override}
         size={150}

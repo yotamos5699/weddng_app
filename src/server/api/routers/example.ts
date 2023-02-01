@@ -9,8 +9,8 @@ const getSiteContent = async (keys: string) =>
       { withCredentials: false }
     )
     .then((res) => {
-      console.log({ res });
-      console.log("res.data ", res.data);
+      //  console.log({ res });
+      // console.log("res.data ", res.data);
       return res.data;
     });
 
@@ -35,7 +35,7 @@ export const exampleRouter = createTRPCRouter({
 
     .query(async ({ input }) => {
       const res: siteContentRow[] = await getSiteContent(input.keys);
-      console.log({ res });
+      // console.log({ res });
       return res;
     }),
 });
