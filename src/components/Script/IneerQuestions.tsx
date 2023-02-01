@@ -7,7 +7,7 @@ export const InnerQuestions = ({
   array,
 }: innerArrayProps) => {
   return (
-    <div className="flex h-full w-screen flex-col items-center gap-4  ">
+    <div className="flex  w-screen flex-col items-center gap-4  ">
       {script &&
         array.map((message: innerMessage, idx: number) => {
           return (
@@ -23,9 +23,7 @@ export const InnerQuestions = ({
                   } w-full flex-row-reverse justify-center`}
                 >
                   <p
-                    className={`${
-                      !mainMessage?.styleData && " w-1/3 "
-                    } text-[12px] ${
+                    className={`${!mainMessage?.styleData && " w-1/3 "} ${
                       mainMessage?.styleData?.isFlexCol && "mb-2"
                     } `}
                   >
@@ -110,11 +108,9 @@ export const InnerQuestions = ({
                   />
                 </div>
               ) : (
-                <div className="flex w-full flex-row-reverse items-center border-2 border-white">
+                <div className="items-centere flex w-full flex-row-reverse">
                   <p
-                    className={`${
-                      !mainMessage?.styleData && " w-1/3 "
-                    } text-[12px] ${
+                    className={`${!mainMessage?.styleData && " w-1/3 "}  ${
                       mainMessage?.styleData?.isFlexCol && "mb-2"
                     } `}
                   >

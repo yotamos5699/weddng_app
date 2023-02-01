@@ -11,8 +11,8 @@ export const Question = ({
   console.log({ message });
   return (
     <div className="h-full w-full flex-col items-center">
-      <div className="border-1 w-full border-white">
-        <h1 className="  rounded-lg border-2 border-pink-100 text-center text-base">
+      <div className="border-1 mb-1 flex w-full flex-col items-center  border-white">
+        <h1 className="w-3/4  rounded-lg border-2 border-pink-100 text-center text-base">
           {message?.mainHeader}
         </h1>
       </div>

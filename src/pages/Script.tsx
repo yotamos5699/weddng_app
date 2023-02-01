@@ -54,7 +54,7 @@ function Script() {
         />
       )}
 
-      <div className="flex w-full justify-center  gap-40 border-2 border-white">
+      <div className="flex w-3/4 justify-between   border-2 border-white">
         <button
           onClick={() => {
             if (progressBar.currentNum < progressBar.totalNum - 1)
