@@ -7,7 +7,7 @@ export const InnerQuestions = ({
   array,
 }: innerArrayProps) => {
   return (
-    <div className="flex  w-screen flex-col items-center gap-4  ">
+    <div className="mt-10  flex w-screen flex-col items-center gap-10  ">
       {script &&
         array.map((message: innerMessage, idx: number) => {
           return (
@@ -25,7 +25,7 @@ export const InnerQuestions = ({
                   <p
                     className={`${!mainMessage?.styleData && " w-1/3 "} ${
                       mainMessage?.styleData?.isFlexCol && "mb-2"
-                    } `}
+                    } text-2xl`}
                   >
                     {message.header}
                   </p>
@@ -33,8 +33,8 @@ export const InnerQuestions = ({
                     {mainMessage?.inputs[idx]?.addedText}
                   </p>
                   <input
-                    className={` }
-                  mb-2  w-1/3 rounded-lg text-center text-sm text-black
+                    className={` mb-2
+                  h-10  w-1/3 rounded-lg text-center text-sm text-black
                    `}
                     type={message.inputType}
                     placeholder={message.default}
@@ -73,7 +73,11 @@ export const InnerQuestions = ({
                 </div>
               ) : !mainMessage?.styleData?.isMultiCheck ? (
                 <div>
-                  <p className={"flex w-full flex-row-reverse justify-center"}>
+                  <p
+                    className={
+                      "mb-2 flex w-full flex-row-reverse justify-center text-2xl"
+                    }
+                  >
                     {message.header}
                   </p>
                   <p className="text-[8px]">
@@ -81,7 +85,7 @@ export const InnerQuestions = ({
                   </p>
                   <textarea
                     placeholder={message.default}
-                    className=" w-1/2 text-center text-black"
+                    className=" h-20 w-3/4 rounded-lg text-center text-black"
                     value={
                       script[progressBar.currentNum]?.inputs[idx]?.content ?? ""
                     }
@@ -108,21 +112,15 @@ export const InnerQuestions = ({
                   />
                 </div>
               ) : (
-                <div className="items-centere flex w-full flex-row-reverse">
-                  <p
-                    className={`${!mainMessage?.styleData && " w-1/3 "}  ${
-                      mainMessage?.styleData?.isFlexCol && "mb-2"
-                    } `}
-                  >
+                <div className="items-centere mb-4 flex w-full flex-row-reverse">
+                  <p className={`w-full text-right text-2xl`}>
                     {message.header}
                   </p>
                   <p className="w-1/2 text-[8px]">
                     {mainMessage?.inputs[idx]?.addedText}
                   </p>
                   <input
-                    className={` }
-                  mb-2  w-1/2 rounded-lg text-center text-sm text-black
-                   `}
+                    className={"w-1/2"}
                     type={message.inputType}
                     placeholder={message.default}
                     value={

@@ -33,7 +33,7 @@ function Script() {
   }, [progressBar, script]);
 
   return (
-    <div className=" flex h-screen w-screen flex-col items-center gap-8">
+    <div className=" flex flex-col items-center gap-8">
       <h1 className="flex text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
         <a target="_blank">
           <TiArrowBackOutline
