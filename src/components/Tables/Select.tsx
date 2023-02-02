@@ -15,7 +15,9 @@ function Select_(props: selectProps) {
   return (
     <select
       name="select"
-      className={`w-full ${props.textStyls ?? ""}   text-center text-black`}
+      className={`w-full ${
+        props.textStyls ?? ""
+      }   text-center font-bold text-black`}
       id="pivot"
       //   placeholder={props.default}
       onChange={(e) => handleSelect(e)}

@@ -163,15 +163,15 @@ export const Row = (props: rowProps) => {
         <td className="stat-table-tbody-tr-td">{props.rowData.phone}</td>
       </a>
       <td className="stat-table-tbody-tr-td">{props.rowData.amount}</td>
-      <td className="stat-table-tbody-tr-td">{props.rowData.message}</td>{" "}
-      <td className="stat-table-tbody-tr-td">
-        <div className="flex items-center">
+      <td className="stat-table-tbody-tr-td-s">{props.rowData.message}</td>{" "}
+      <td className="stat-table-tbody-tr-td h-s ">
+        <div className="inline-flex items-center rounded-xl">
           <input
+            size={50}
+            className="h-8 w-8 rounded-2xl"
             id="checkbox-table-search-1"
             type="checkbox"
-            className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600 dark:focus:ring-offset-gray-800"
           />
-          <label className="sr-only">checkbox</label>
         </div>
       </td>
     </tr>
@@ -190,9 +190,9 @@ export const Headers = ({ headers }: headersProps) => {
         <th className="stat-table-thead-tr-th">{headers[1]}</th>
 
         <th className="stat-table-thead-tr-th">{headers[2]}</th>
-        <th className="stat-table-thead-tr-th">{headers[3]}</th>
+        <th className="stat-table-thead-tr-th-s">{headers[3]}</th>
         <th className="stat-table-thead-tr-th">{headers[4]}</th>
-        <th className="stat-table-thead-tr-th">{headers[5]}</th>
+        <th className="stat-table-thead-tr-th-s">{headers[5]}</th>
       </tr>
     </thead>
   );
