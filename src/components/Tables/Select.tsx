@@ -1,20 +1,24 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 
 type selectProps = {
-  default: string;
-  values: string[];
-  handleSelect?: Dispatch<SetStateAction<any>>;
+  default: string | number;
+  values: string[] | number[];
+  textStyls?: string;
+  setRangeInterval?: Dispatch<SetStateAction<number>>;
 };
 
 function Select_(props: selectProps) {
   console.log({ props });
+  const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    props?.setRangeInterval && props.setRangeInterval(parseInt(e.target.value));
+  };
   return (
     <select
       name="select"
-      className={"w-full  text-center text-black"}
+      className={`w-full ${props.textStyls ?? ""}   text-center text-black`}
       id="pivot"
       //   placeholder={props.default}
-      onChange={props.handleSelect}
+      onChange={(e) => handleSelect(e)}
       defaultValue={props.default}
     >
       {props.values.map((item: any, idx: number) => {

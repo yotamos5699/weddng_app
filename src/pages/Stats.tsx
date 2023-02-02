@@ -4,6 +4,7 @@ import { TiArrowBackOutline } from "react-icons/ti";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import { CategoricalChartState } from "recharts/types/chart/generateCategoricalChart";
 import { makeMockTableData } from "../components/Tables/makeData";
+//import MuiTable from "../components/Tables/MuiTable";
 import StatsTable from "../components/Tables/StatsTable";
 import { saveRouterProps } from "../hooks/routerHooks";
 import useLocalStorage from "../hooks/useLocalStorage";
@@ -76,7 +77,10 @@ export default function Stats() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className=" container flex flex-col items-center justify-center px-4 py-16 ">
+      <div
+        dir="rtl"
+        className=" container flex flex-col items-center justify-center px-4 py-16 "
+      >
         <h1 className="flex text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
           <a
             onClick={() => {

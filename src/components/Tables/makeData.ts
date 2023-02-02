@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
 import { boolean, number } from "zod";
 
-export type Person = {
+export type Person_ = {
   name: string;
   stat: "אולי" | "אין מענה" | "אושר" | "סורב" | null | any;
   phone: string;
@@ -11,7 +11,7 @@ export type Person = {
 };
 
 const stats = ["אולי", "אין מענה", "אושר", "סורב", "לא נשלחה"];
-const newPerson = (): Person => {
+const newPerson = (): Person_ => {
   return {
     name: faker.name.fullName(),
     stat: stats[Math.floor(Math.random() * stats.length - 1)],
