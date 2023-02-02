@@ -55,17 +55,17 @@ function StatsTable({ data, sortKey }: statTableProps) {
       setCropedTdata(
         processedData.slice(tableRange.startPointer, tableRange.endPointer)
       );
-  }, [currentSortKey]);
+  }, [currentSortKey, rangeInterval]);
 
   useEffect(() => {
     console.log({ currentSortKey, cropedTdata, tableRange, processedData });
-  }, [currentSortKey, cropedTdata]);
+  }, [currentSortKey, cropedTdata, tableRange]);
 
   useEffect(() => {
     processedData != null &&
-      setCropedTdata(
-        processedData.slice(tableRange.startPointer, tableRange.endPointer)
-      );
+      setCropedTdata([
+        ...processedData.slice(tableRange.startPointer, tableRange.endPointer),
+      ]);
   }, [tableRange]);
 
   return (
