@@ -198,7 +198,6 @@ export const TableNav = (props: navProps) => {
                 endPointer: props.tableRange.startPointer,
               });
             }}
-            size={50}
           />
         )}
       </div>
