@@ -1,6 +1,7 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 import { TfiControlBackward, TfiControlForward } from "react-icons/tfi";
+import useDebouncs from "../../hooks/useDebouncs";
 
 import Select_ from "./Select";
 const statsValues = ["אולי", "אין מענה", "אושר", "סורב", "לא נשלחה"];
@@ -39,6 +40,12 @@ function StatsTable({ data, sortKey }: statTableProps) {
   });
   const [rangeInterval, setRangeInterval] = useState(10);
   const [cropedTdata, setCropedTdata] = useState<tRow[]>();
+  const [searchValue, setSearchValue] = useState("");
+  const debouncedSearchValue = useDebouncs(searchValue, 500);
+  useEffect(() => {
+    console.log({ debouncedSearchValue });
+  }, [debouncedSearchValue]);
+
   useEffect(() => {
     console.log("use effect !!!!");
     setTableRange({
@@ -76,18 +83,34 @@ function StatsTable({ data, sortKey }: statTableProps) {
       {processedData && (
         <div>
           <SearchVectors
+            searchValue={searchValue}
+            setSearchValue={setSearchValue}
             key={sortKey}
             values={statsValues}
             setCurrentSortKey={setCurrentSortKey}
           />
           <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400">
             <Headers headers={headersList} />
-            <tbody className="stat-table-body">
-              {cropedTdata &&
-                cropedTdata.map((row: tRow) => (
-                  <Row hndleClick={undefined} rowData={row} />
-                ))}
-            </tbody>
+            {debouncedSearchValue === "" ? (
+              <tbody className="stat-table-body">
+                {cropedTdata &&
+                  cropedTdata.map((row: tRow) => (
+                    <Row hndleClick={undefined} rowData={row} />
+                  ))}
+              </tbody>
+            ) : (
+              <tbody>
+                {processedData &&
+                  debouncedSearchValue &&
+                  processedData
+                    .filter((row) =>
+                      row.name.toLowerCase().includes(debouncedSearchValue)
+                    )
+                    .map((row: tRow) => (
+                      <Row hndleClick={undefined} rowData={row} />
+                    ))}
+              </tbody>
+            )}
           </table>
           <TableNav
             rangeInterval={rangeInterval}
@@ -107,6 +130,8 @@ export default StatsTable;
 interface searchVectorsProps {
   key: string | null;
   values: string[];
+  searchValue: string;
+  setSearchValue: React.Dispatch<React.SetStateAction<string>>;
   setCurrentSortKey: React.Dispatch<
     React.SetStateAction<
       "אולי" | "אין מענה" | "אושר" | "סורב" | "לא נשלחה" | "הכל" | null
@@ -115,16 +140,15 @@ interface searchVectorsProps {
 }
 
 export const SearchVectors = (props: searchVectorsProps) => {
-  const [searchValue, setSearchValue] = useState("");
   return (
     <div className="flex gap-8">
       <div className="stat-table-thead mb-4 flex  w-2/5 gap-4 rounded-xl text-center ">
         <h1 className="w-2/3 text-center text-xl font-bold ">חיפוש</h1>
         <input
           className="text-center text-xl font-bold text-black"
-          value={searchValue}
+          value={props.searchValue}
           onChange={(e) => {
-            setSearchValue(e.target.value);
+            props.setSearchValue(e.target.value);
           }}
           placeholder="הכנס מילת חיפוש"
           type={"text"}
