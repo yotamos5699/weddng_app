@@ -1,16 +1,16 @@
 import React, { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 
 type selectProps = {
-  default: string | number;
+  default: string | number | null;
   values: string[] | number[];
   textStyls?: string;
-  setRangeInterval?: Dispatch<SetStateAction<number>>;
+  handleChange?: any;
 };
 
 function Select_(props: selectProps) {
-  console.log({ props });
+  //  console.log({ props });
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    props?.setRangeInterval && props.setRangeInterval(parseInt(e.target.value));
+    props.handleChange && props.handleChange(e);
   };
   return (
     <select
@@ -19,7 +19,7 @@ function Select_(props: selectProps) {
       id="pivot"
       //   placeholder={props.default}
       onChange={(e) => handleSelect(e)}
-      defaultValue={props.default}
+      defaultValue={props.default ?? ""}
     >
       {props.values.map((item: any, idx: number) => {
         return (

@@ -1,8 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 
-import { MdOutlineSecurityUpdateWarning } from "react-icons/md";
 import { TfiControlBackward, TfiControlForward } from "react-icons/tfi";
-import { tableData } from "../../mockData";
 
 import Select_ from "./Select";
 const statsValues = ["אולי", "אין מענה", "אושר", "סורב", "לא נשלחה"];
@@ -30,6 +28,10 @@ const headersList = [
 ];
 
 function StatsTable({ data, sortKey }: statTableProps) {
+  console.log({ data });
+  const [currentSortKey, setCurrentSortKey] = useState<typeof sortKey | "הכל">(
+    sortKey
+  );
   const [processedData, setProcessedData] = useState<tRow[] | null>(null);
   const [tableRange, setTableRange] = useState({
     startPointer: 0,
@@ -41,17 +43,23 @@ function StatsTable({ data, sortKey }: statTableProps) {
     console.log("use effect !!!!");
     setTableRange({
       startPointer: 0,
-      endPointer: 10,
+      endPointer: rangeInterval,
     });
-    !processedData &&
+    data &&
       setProcessedData(
-        sortKey ? data.filter((row) => row.stat === sortKey) : data
+        currentSortKey == "הכל" || !currentSortKey
+          ? data
+          : data.filter((row) => row.stat === sortKey)
       );
     processedData &&
       setCropedTdata(
         processedData.slice(tableRange.startPointer, tableRange.endPointer)
       );
-  }, []);
+  }, [currentSortKey]);
+
+  useEffect(() => {
+    console.log({ currentSortKey, cropedTdata, tableRange, processedData });
+  }, [currentSortKey, cropedTdata]);
 
   useEffect(() => {
     processedData != null &&
@@ -61,12 +69,20 @@ function StatsTable({ data, sortKey }: statTableProps) {
   }, [tableRange]);
 
   return (
-    <div dir="rtl" className="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div
+      dir="rtl"
+      className="relative mt-8 overflow-x-auto shadow-md sm:rounded-lg"
+    >
       {processedData && (
         <div>
+          <SearchVectors
+            key={sortKey}
+            values={statsValues}
+            setCurrentSortKey={setCurrentSortKey}
+          />
           <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400">
             <Headers headers={headersList} />
-            <tbody>
+            <tbody className="stat-table-body">
               {cropedTdata &&
                 cropedTdata.map((row: tRow) => (
                   <Row hndleClick={undefined} rowData={row} />
@@ -88,6 +104,46 @@ function StatsTable({ data, sortKey }: statTableProps) {
 
 export default StatsTable;
 
+interface searchVectorsProps {
+  key: string | null;
+  values: string[];
+  setCurrentSortKey: React.Dispatch<
+    React.SetStateAction<
+      "אולי" | "אין מענה" | "אושר" | "סורב" | "לא נשלחה" | "הכל" | null
+    >
+  >;
+}
+
+export const SearchVectors = (props: searchVectorsProps) => {
+  const [searchValue, setSearchValue] = useState("");
+  return (
+    <div className="flex gap-8">
+      <div className="stat-table-thead mb-4 flex  w-2/5 gap-4 rounded-xl text-center ">
+        <h1 className="w-2/3 text-center text-xl font-bold ">חיפוש</h1>
+        <input
+          className="text-center text-xl font-bold text-black"
+          value={searchValue}
+          onChange={(e) => {
+            setSearchValue(e.target.value);
+          }}
+          placeholder="הכנס מילת חיפוש"
+          type={"text"}
+        />
+      </div>
+      <div className="stat-table-thead mb-4 flex  w-2/5 gap-4 rounded-xl text-center ">
+        <h1 className="w-2/3 text-center text-xl font-bold  ">מיין לפי</h1>
+        <Select_
+          handleChange={(e: any) => {
+            props.setCurrentSortKey(e.target.value);
+          }}
+          default={props.key}
+          values={[...props.values, "הכל"]}
+        />
+      </div>
+    </div>
+  );
+};
+
 type rowProps = {
   hndleClick: any;
   rowData: tRow;
@@ -95,25 +151,20 @@ type rowProps = {
 
 export const Row = (props: rowProps) => {
   return (
-    <tr
-      dir="rtl"
-      className="border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600"
-    >
-      <td className="px-6 py-4">{props.rowData.name}</td>
-      <td className="px-6 py-4">
+    <tr dir="rtl" className="stat-table-tbody-tr">
+      <td className="stat-table-tbody-tr-td">{props.rowData.name}</td>
+      <td className="stat-table-tbody-tr-td">
         <Select_ default={props.rowData.stat} values={statsValues} />
       </td>
       <a
         className="hover:bg-gray-300 hover:text-gray-800"
         href={`tel:+972${props.rowData.phone}`}
       >
-        <td className="bc11 hover:bg-gray-300 hover:text-gray-800">
-          {props.rowData.phone}
-        </td>
+        <td className="stat-table-tbody-tr-td">{props.rowData.phone}</td>
       </a>
-      <td className="px-6 py-4">{props.rowData.amount}</td>
-      <td className="px-6 py-4">{props.rowData.message}</td>{" "}
-      <td className="w-4 p-4">
+      <td className="stat-table-tbody-tr-td">{props.rowData.amount}</td>
+      <td className="stat-table-tbody-tr-td">{props.rowData.message}</td>{" "}
+      <td className="stat-table-tbody-tr-td">
         <div className="flex items-center">
           <input
             id="checkbox-table-search-1"
@@ -133,15 +184,15 @@ type headersProps = {
 
 export const Headers = ({ headers }: headersProps) => {
   return (
-    <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
-      <tr dir="rtl" className="">
-        <th className="px-6 py-3">{headers[0]}</th>
-        <th className="px-6 py-3">{headers[1]}</th>
+    <thead className="stat-table-thead">
+      <tr dir="rtl" className="stat-table-thead-tr">
+        <th className="stat-table-thead-tr-th">{headers[0]}</th>
+        <th className="stat-table-thead-tr-th">{headers[1]}</th>
 
-        <th className="px-6 py-3">{headers[2]}</th>
-        <th className="px-6 py-3">{headers[3]}</th>
-        <th className="px-6 py-3">{headers[4]}</th>
-        <th className="px-6 py-3">{headers[5]}</th>
+        <th className="stat-table-thead-tr-th">{headers[2]}</th>
+        <th className="stat-table-thead-tr-th">{headers[3]}</th>
+        <th className="stat-table-thead-tr-th">{headers[4]}</th>
+        <th className="stat-table-thead-tr-th">{headers[5]}</th>
       </tr>
     </thead>
   );
@@ -156,7 +207,11 @@ interface navProps {
   >;
 }
 export const TableNav = (props: navProps) => {
-  console.log("table nav props", { props });
+  // console.log("table nav props", { props });
+
+  const handleChange = (e: any) => {
+    props.setRangeInterval(parseInt(e.target.value));
+  };
   return (
     <div className="flex items-center justify-center bg-gray-50 uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
       <div className="flex w-1/2 gap-8">
@@ -178,7 +233,7 @@ export const TableNav = (props: navProps) => {
           />
         )}
         <Select_
-          setRangeInterval={props.setRangeInterval}
+          handleChange={handleChange}
           textStyls={"text-xl font-bold"}
           default={10}
           values={[5, 10, 20, 50]}
@@ -195,7 +250,7 @@ export const TableNav = (props: navProps) => {
                   : newRequestedStartPointerValue;
               props.setTableRange({
                 startPointer: newRequestedStartPointerValue,
-                endPointer: props.tableRange.startPointer,
+                endPointer: newRequestedStartPointerValue + props.rangeInterval,
               });
             }}
           />

@@ -35,3 +35,24 @@ body {
     @apply flex flex-col;
   }
 }
+@layer components {
+  .stat-table {
+    @apply w-full text-left text-sm text-gray-500 dark:text-gray-400;
+  }
+  .stat-table-thead {
+    @apply border-2 border-gray-300 bg-gray-900 text-xl uppercase text-gray-100 dark:bg-gray-700 dark:text-gray-400;
+  }
+  .stat-table-thead-tr {
+    @apply text-center;
+  }
+
+  .stat-table-thead-tr-th {
+    @apply px-6 py-3;
+  }
+  .stat-table-tbody-tr {
+    @apply border-b bg-gradient-to-b from-[#2e026d] to-[#15162c] text-xl text-gray-200 hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600;
+  }
+  .stat-table-tbody-tr-td {
+    @apply px-6 py-4;
+  }
+}
