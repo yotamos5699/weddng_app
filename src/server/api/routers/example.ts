@@ -14,6 +14,25 @@ const getSiteContent = async (keys: string) =>
       return res.data;
     });
 
+export const fetchPlans = async (key: string) => {
+  const url =
+    "https://script.google.com/macros/s/AKfycbx7ZLwlp1PTc3mAWriUGGo0mWiMdQNqKODFZnkn9vm2jqkd1ZgjRLAGGe7bAYpV6qBg-g/exec?type=" +
+    key;
+  console.log({ url, key });
+  return await axios.get(url, { withCredentials: false }).then((res) => {
+    console.log("res data ", res.data);
+    return res.data;
+  });
+};
+interface plansProps {
+  name: string;
+  msgAmount: number;
+  savedAmount: number;
+  invites: boolean;
+  bit: boolean;
+  cc: boolean;
+}
+
 export const exampleRouter = createTRPCRouter({
   hello: publicProcedure
     .input(z.object({ text: z.string() }))
@@ -35,6 +54,14 @@ export const exampleRouter = createTRPCRouter({
 
     .query(async ({ input }) => {
       const res: siteContentRow[] = await getSiteContent(input.keys);
+      // console.log({ res });
+      return res;
+    }),
+  getPlansContent: publicProcedure
+    .input(z.object({ key: z.string() }))
+
+    .query(async ({ input }) => {
+      const res: plansProps[] = await fetchPlans(input.key);
       // console.log({ res });
       return res;
     }),

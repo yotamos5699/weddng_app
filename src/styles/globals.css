@@ -62,3 +62,15 @@ body {
     @apply px-2 py-4 text-center;
   }
 }
+
+@layer components {
+  .config-main {
+    @apply mt-2 flex w-full flex-col items-center gap-4  border-2 border-pink-100 text-sm text-gray-500 dark:text-gray-400;
+  }
+  .config-row {
+    @apply flex w-full gap-8 border-2 border-gray-300 bg-gray-900 text-center text-xl uppercase text-gray-100 dark:bg-gray-700 dark:text-gray-400;
+  }
+  .config-cell {
+    @apply w-1/2;
+  }
+}

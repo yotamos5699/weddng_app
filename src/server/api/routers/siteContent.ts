@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const getSiteContent = async () =>
   await axios
     .get(
@@ -11,7 +13,6 @@ type siteContentRow = {
   content: string;
 };
 
-import axios from "axios";
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure, protectedProcedure } from "../trpc";
