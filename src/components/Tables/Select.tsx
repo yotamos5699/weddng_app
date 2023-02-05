@@ -1,7 +1,7 @@
 import React, { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 
 type selectProps = {
-  default: string | number | null;
+  default: string | number | null | undefined;
   values: string[] | number[];
   textStyls?: string;
   handleChange?: any;

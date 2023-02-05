@@ -65,10 +65,10 @@ body {
 
 @layer components {
   .config-main {
-    @apply mt-2 flex w-full flex-col items-center gap-4  border-2 border-pink-100 text-sm text-gray-500 dark:text-gray-400;
+    @apply mt-2 flex w-full flex-col items-center gap-4  text-sm text-gray-500 dark:text-gray-400;
   }
   .config-row {
-    @apply flex w-full gap-8 border-2 border-gray-300 bg-gray-900 text-center text-xl uppercase text-gray-100 dark:bg-gray-700 dark:text-gray-400;
+    @apply flex h-12 w-full items-center gap-8 border-2 border-gray-400 bg-gray-900 text-center text-xl uppercase text-gray-200 dark:bg-gray-700 dark:text-gray-400;
   }
   .config-cell {
     @apply w-1/2;
